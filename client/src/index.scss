@@ -1,0 +1,65 @@
+html,
+body,
+root,
+#book-shelf {
+	min-height: 100vh;
+}
+
+#root {
+	height: 100%;
+}
+
+#book-shelf {
+	background-color: #cb997e;
+	height: 100%;
+	padding-left: 2em;
+	padding-right: 2em;
+	padding-top: 56px;
+}
+
+.row {
+	align-items: baseline;
+	justify-content: center;
+}
+
+.book-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin: 10px 0 10px 0;
+
+	.book {
+		display: flex;
+		flex-direction: column-reverse;
+		justify-content: space-between;
+		border-radius: 3px;
+		padding: 0.5em 15px 0.5em 15px;
+
+		.book-title {
+			transform: rotate(-180deg);
+			writing-mode: vertical-rl;
+			height: 85%;
+			padding-left: 1em;
+			padding-right: 1em;
+			font-size: 0.2em;
+			text-align: left;
+		}
+	}
+
+	.book:hover {
+		border: 1px solid white;
+	}
+
+	.accent-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 13px;
+
+		.accent {
+			height: 5px;
+			background-color: #c1a84c;
+			padding: 0 15px 0 15px;
+		}
+	}
+}
