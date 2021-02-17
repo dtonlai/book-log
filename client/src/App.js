@@ -29,6 +29,7 @@ import Col from "react-bootstrap/Col";
 
 const App = () => {
 	const dispatch = useDispatch();
+
 	const books = useSelector((state) => state.books);
 	const emptyBook = { title: "", author: "", comments: "", status: "Not completed", color: "" };
 	const [show, setShow] = useState();
@@ -57,7 +58,13 @@ const App = () => {
 		}
 	};
 
+	const handleFormChange = (e) => {
+		dispatch(getBooks());
+		setSearchTerm(e.target.value);
+	};
+
 	const handleSearch = (e) => {
+		e.preventDefault();
 		dispatch(searchBooks(searchTerm));
 	};
 
@@ -111,32 +118,20 @@ const App = () => {
 				fixed={isMobile ? "bottom" : "top"}
 				onSelect={handleNavSelect}
 			>
-				<Navbar.Brand href="#home">Book-Log</Navbar.Brand>
+				<Navbar.Brand href="/">Book-Log</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
 						<Nav.Link eventKey="add">Add book</Nav.Link>
 						<NavDropdown title="Sort by" id="basic-nav-dropdown">
-							<NavDropdown.Item href="#action/3.1" eventKey="title">
-								Title
-							</NavDropdown.Item>
-							<NavDropdown.Item href="#action/3.2" eventKey="author">
-								Author
-							</NavDropdown.Item>
-							<NavDropdown.Item href="#action/3.3" eventKey="status">
-								Status
-							</NavDropdown.Item>
-							<NavDropdown.Item href="#action/3.3" eventKey="series">
-								Series
-							</NavDropdown.Item>
+							<NavDropdown.Item eventKey="title">Title</NavDropdown.Item>
+							<NavDropdown.Item eventKey="author">Author</NavDropdown.Item>
+							<NavDropdown.Item eventKey="status">Status</NavDropdown.Item>
+							<NavDropdown.Item eventKey="series">Series</NavDropdown.Item>
 						</NavDropdown>
 					</Nav>
 					<Form inline onSubmit={handleSearch}>
-						<FormControl
-							type="text"
-							className="mr-sm-2"
-							onChange={(e) => setSearchTerm(e.target.value)}
-						/>
+						<FormControl type="text" className="mr-sm-2" onChange={handleFormChange} />
 						<Button variant="outline-success" type="submit">
 							Search
 						</Button>
@@ -229,7 +224,7 @@ const App = () => {
 									<Form.Control
 										type="text"
 										placeholder="Hitchhiker's Guide to the Galaxy"
-										defaultValue={bookData.series}
+										defaultValue={bookData.series || " "}
 										disabled={disabled ? true : false}
 										onChange={(e) =>
 											setBookData({ ...bookData, series: e.target.value })
