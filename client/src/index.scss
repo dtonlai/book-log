@@ -19,7 +19,7 @@ root,
 }
 
 .row {
-	align-items: baseline;
+	align-items: flex-end;
 	justify-content: center;
 }
 
@@ -31,6 +31,7 @@ root,
 
 	.book {
 		display: flex;
+		align-items: center;
 		flex-direction: column-reverse;
 		justify-content: space-between;
 		border-radius: 3px;
@@ -47,15 +48,12 @@ root,
 		}
 	}
 
-	.book:hover {
-		border: 1px solid white;
-	}
-
 	.accent-container {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		height: 13px;
+		width: 100%;
 
 		.accent {
 			height: 5px;
